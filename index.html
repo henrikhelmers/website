@@ -82,7 +82,7 @@
 
     // Read cookie, set document color, update button selected state
     function updateColorButtonSelectedState() {
-      let storedColor = Object.fromEntries(document.cookie.split(';').map(i => i.trim().split('='))).color;
+      let storedColor = Object.fromEntries(document.cookie.split(';').map(i => i.trim().split('='))).color ?? "#A47864";
       document.documentElement.style.setProperty('--color', storedColor)
       for (button of colorButtons) {
         const buttonHexColor = Object.entries(colors).find(i => i[1] === button.innerText)[0];
