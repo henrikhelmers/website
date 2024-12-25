@@ -6,12 +6,17 @@
   <link rel="stylesheet" href="../style.css">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-R74HRLRZRR"></script>
   <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-R74HRLRZRR');</script>
+  <script>
+      document.documentElement.style.setProperty('--color', Object.fromEntries(document.cookie.split(';').map(i => i.trim().split('='))).color ?? "#A47864");
+    </script>
 </head>
 <body>
   <header>
-    <img src="photoreplace_icon.png" alt="Icon for Photo Replace" width="224">
-    <h1>Photo Replace</h1>
-    <p class="lead"></p>
+    <div>
+      <img src="photoreplace_icon.png" alt="Icon for Photo Replace" width="224">
+      <h1>Photo Replace</h1>
+      <p class="lead"></p>
+    </div>
   </header>
   <article>
     <p>

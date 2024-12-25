@@ -6,43 +6,97 @@
   <link rel="stylesheet" href="style.css">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-R74HRLRZRR"></script>
   <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-R74HRLRZRR');</script>
+  <script>
+    document.documentElement.style.setProperty('--color', Object.fromEntries(document.cookie.split(';').map(i => i.trim().split('='))).color ?? "#A47864");
+  </script>
+
 </head>
 <body>
 
-  <h1>Henrik Helmers</h1>
-  <p>
-    <span>👋🏻</span>Hello! I am an experienced designer and app developer living in Stange, the heart of the Norwegian countryside. Working for Norwegian State Lotteries.
-  </p>
+  <header>
+    <div>
+      <h1>Henrik Helmers</h1>
+      <p>
+        <span>👋🏻</span>Hello! I am an app developer and designer living in Stange (the Norwegian countryside). I run the company <em>Helmers Sjøbanan</em> at night and work for <em>Norsk Tipping</em> by day.
+      </p>
+    </div>
+  </header>
 
-  <h2>Contact</h2>
-  <ul>
-    <li>Find me on <a rel="me" href="https://social.vivaldi.net/@helmers">Mastodon</a>, the new Twitter
-    <li>Mail your love letters to <a href="mailto:helmers@me.com">helmers@me.com</a>
-    <li>In case of emergency call <a href="tel:+47 970 45 990">970 45 990</a>
-    <li>If you are a recruiter please remove me from your list
-  </ul>
+  <article>
+    <h2>Contact</h2>
+    <ul>
+      <li>Find me on Threads or Mastodon, the new Twitters
+      <li>Mail your love letters to <a href="mailto:helmers@me.com">helmers@me.com</a>
+      <li>In case of emergency call <a href="tel:+47 970 45 990">+47 970 45 990</a>
+      <li>If you are a recruiter please remove me from your list
+    </ul>
+    <h2>Apps</h2>
+    <ul>
+      <li><a href="photoreplace/">Photo Replace</a>
+      <li><a href="filmgrain/">film & grain</a>
+      <li><a href="charactersheet/">CharacterSheet</a>
+    </ul>
+    <h2>Websites</h2>
+    <ul>
+      <li><a href="folkeeventyr.no">Norske Folkeeventyr</a>
+    </ul>
+    <h2 id="colorPicker">Color</h2>
+    <p >Some highlights from Pantone yearly colors.</p>
+  </article>
 
-  <h2>Apps</h2>
-  <ul>
-    <li><a href="photoreplace/">Photo Replace</a>
-    <li><a href="filmgrain/">film & grain</a>
-  </ul>
+  <footer>
+    <div>
+      <h2>Privacy Policy</h2>
+      <p>
+        <a href="privacy/">Privacy Policy</a>
+      </p>
+    </div>
+  </footer>
 
-  <h2>Websites</h2>
-  <ul>
-    <li><a href="folkeeventyr.no">Norske Folkeeventyr</a>
-  </ul>
+  <script>
+    // List of available colors
+    const colors = {
+      "#A47864": "Mocha Mousse",
+      "#BB2649": "Vive Magenta",
+      "#6667AB": "Very Peri",
+      "#88b04b": "Greenery",
+    };
 
+    // Create and store button Elements
+    const colorButtons = Object.entries(colors).map(([colorHex, colorName]) => {
+      const button = document.createElement("button");
+      button.innerText = colorName;
+      button.addEventListener("click", () => {
+        document.cookie = "color=" + colorHex + "; path=/";
+        updateColorButtonSelectedState();
+      });
+      return button;
+    });
 
-  <h2>What is this Color</h2>
-  <p>
-    This is <em>Vive Magenta</em>, the Pantone Color of the Year 2023.
-  </p>
+    // Add buttons to DOM
+    function colorButtonSetup() {
+      const fragment = document.createDocumentFragment();
+      colorButtons.forEach((button) => { fragment.appendChild(button); });
+      document.querySelector("#colorPicker + p").after(fragment);
+    }
 
-  <p>
-    <a href="privacy/">Privacy Policy</a>
-  </p>
+    // Read cookie, set document color, update button selected state
+    function updateColorButtonSelectedState() {
+      let storedColor = Object.fromEntries(document.cookie.split(';').map(i => i.trim().split('='))).color;
+      document.documentElement.style.setProperty('--color', storedColor)
+      for (button of colorButtons) {
+        const buttonHexColor = Object.entries(colors).find(i => i[1] === button.innerText)[0];
+        if (storedColor == buttonHexColor) {
+          button.classList.add("selected");
+        } else {
+          button.classList.remove("selected");
+        }
+      }
+    }
 
+    colorButtonSetup();
+    updateColorButtonSelectedState();
 
+  </script>
 </body>
 </html>

@@ -1,31 +1,69 @@
 body {
-  max-width: 580px;
-  padding: 40px;
-  margin: 40px auto;
-  font: 300 16px/28px system-ui, sans-serif;
-  color: #bb2649; /* Vive Magenta */
+  font: normal 14px/22px system-ui, sans-serif;
+  color: oklch(from var(--color) calc(min(l, 0.6)) c h);
+  background: oklch(from var(--color) 0.97 calc(c/10) h);
+  margin: 0;
+}
+
+::selection {
+  background: oklch(from var(--color) calc(min(l, 0.5)) c h / 35%);
+}
+
+header, footer {
+  background: oklch(from var(--color) calc(min(l, 0.6)) c h);
+  color: oklch(from var(--color) 0.97 calc(c/10) h);
+}
+
+article, header > div, footer > div {
+  max-width: 540px;
+  padding: 10px;
+  margin: 0 auto;
+}
+
+header {
+  padding-top: 100px;
+}
+
+footer {
+  margin-top: 100px;
+  padding-bottom: 100px;
 }
 
 a {
-  color: inherit;
-  font-weight: 400;
-  text-decoration-color: #bb264933;
+  color: oklch(from var(--color) calc(min(l, 0.45)) c h);
+  text-decoration-color: oklch(from var(--color) calc(min(l, 0.5)) c h / 35%);
   text-decoration-thickness: 2px;
+  text-underline-offset: 2px;
 }
 
+a:hover {
+  background: oklch(from var(--color) calc(min(l, 0.5)) c h /5%);
+}
+
+footer a, header a {
+  color: oklch(from var(--color) 0.9 calc(c/2) h);
+  text-decoration-color: oklch(from var(--color) calc(max(l, 0.95)) c h / 35%);
+}
+
+footer a:hover, header a:hover {
+  background: oklch(from var(--color) calc(max(l, 0.98)) 0.05 h /10%);
+}
+
+
 h1 {
+  font-size: xxx-large;
   font-weight: 900;
 }
 
-h1 + p {
-  font-weight: 400;
+h1 + p, h2 + p {
+  margin-top: 0;
 }
 
 h1 + p > span {
   display: inline-block;
   width: 30px;
   margin-left: -30px;
-  animation: wave 10s infinite;
+  animation: wave 5s infinite;
 }
 
 @keyframes wave {
@@ -36,21 +74,44 @@ h1 + p > span {
 
 
 h2 {
-  margin-top: 2em;
-  margin-bottom: 0;
+  margin-top: 1.5em;
+  margin-bottom: 0.25em;
+  font-weight: 500;
 }
 
 ul {
   list-style: none;
+  padding-left: 24px;
 }
 
 li::before {
   content: "—";
   font-weight: 100;
-  margin-left: -25px;
-  padding-right: 10px;
+  margin-left: -24px;
+  padding-right: 8px;
 }
 
 img {
   max-width: 100%;
+}
+
+button {
+  font: inherit;
+  padding: 6px 10px;
+  line-height: 1;
+  color: inherit;
+  background: oklch(from var(--color) 0.94 calc(c/5) h);
+  border: 1px solid;
+  box-shadow: 0 2px 1px;
+  user-select: none;
+}
+
+button:active {
+  transform: translateY(1px);
+  box-shadow: 0 0 1px;
+}
+
+button.selected, button:active {
+  background: oklch(from var(--color) 0.85 calc(c/2) h);
+  color: oklch(from var(--color) calc(min(l, 0.4)) c h);
 }
